@@ -335,7 +335,7 @@
 
         <div class="search-add-container">
             <input type="text" class="search-box" id="searchInput" placeholder="🔍 Buscar alabanza por nombre o artista...">
-            <button class="btn btn-primary" onclick="abrirModalAgregar()">➕ Agregar Alabanza</button>
+            <button class="btn btn-primary" id="btnAgregar" onclick="abrirModalAgregar()" style="display: none;">➕ Agregar Alabanza</button>
         </div>
 
         <div class="filters" id="filters"></div>
@@ -408,8 +408,9 @@
             </div>
 
             <div class="action-buttons">
-                <button class="btn btn-primary" onclick="editarCancionActual()">✏️ Editar</button>
-                <button class="btn btn-secondary" onclick="eliminarCancionActual()">🗑️ Eliminar</button>
+                <button class="btn btn-primary btnAdmin" onclick="editarCancionActual()" style="display: none;">✏️ Editar</button>
+                <button class="btn btn-secondary btnAdmin" onclick="eliminarCancionActual()" style="display: none;">🗑️ Eliminar</button>
+                <button class="btn btn-secondary" onclick="cerrarModalVer()">Cerrar</button>
             </div>
         </div>
     </div>
@@ -421,6 +422,31 @@
         let transposicion = 0;
         let tamanoFuente = 16;
         let editandoId = null;
+        
+        // Verificar si es modo admin
+        const urlParams = new URLSearchParams(window.location.search);
+        const esAdmin = urlParams.get('admin') === 'true';
+
+        // Mostrar u ocultar controles de admin
+        function configurarModoAdmin() {
+            if (esAdmin) {
+                // Mostrar botón agregar
+                document.getElementById('btnAgregar').style.display = 'block';
+                // Mostrar botones de editar/eliminar
+                document.querySelectorAll('.btnAdmin').forEach(btn => {
+                    btn.style.display = 'inline-block';
+                });
+                // Actualizar mensaje de debug
+                actualizarDebug('🔑 Modo Administrador activado');
+            } else {
+                // Ocultar botón agregar
+                document.getElementById('btnAgregar').style.display = 'none';
+                // Ocultar botones de editar/eliminar
+                document.querySelectorAll('.btnAdmin').forEach(btn => {
+                    btn.style.display = 'none';
+                });
+            }
+        }
 
         // Alabanzas de ejemplo
         const ejemplos = [
@@ -501,6 +527,9 @@ Cuán grande es Él`
 
         // INICIALIZAR
         function iniciar() {
+            // Configurar modo admin primero
+            configurarModoAdmin();
+            
             try {
                 // Probar localStorage
                 localStorage.setItem('test', 'ok');
@@ -510,11 +539,15 @@ Cuán grande es Él`
                 const guardadas = localStorage.getItem('canciones');
                 if (guardadas) {
                     todasLasCanciones = JSON.parse(guardadas);
-                    actualizarDebug(`✅ ${todasLasCanciones.length} canciones cargadas`);
+                    if (!esAdmin) {
+                        actualizarDebug(`✅ ${todasLasCanciones.length} canciones cargadas`);
+                    }
                 } else {
                     todasLasCanciones = ejemplos;
                     localStorage.setItem('canciones', JSON.stringify(todasLasCanciones));
-                    actualizarDebug('✅ Ejemplos cargados');
+                    if (!esAdmin) {
+                        actualizarDebug('✅ Ejemplos cargados');
+                    }
                 }
             } catch (e) {
                 actualizarDebug('❌ Error: ' + e.message);
