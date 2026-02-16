@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Cancionero Digital 🎸</title>
+    <title>🎶 Himnario León de Judá | Alabanza y Adoración</title>
     <style>
         * {
             margin: 0;
@@ -325,17 +325,17 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🎸 Mi Cancionero Digital</h1>
-            <p>Tu repertorio siempre a la mano</p>
+            <h1>🎶 Himnario | Ministerios León de Judá</h1>
+            <p>Alabanza y Adoración</p>
         </div>
 
         <div class="debug-info" id="debugInfo">
-            Cargando... Verifica que localStorage esté funcionando
+            Cargando himnario... 🎶
         </div>
 
         <div class="search-add-container">
-            <input type="text" class="search-box" id="searchInput" placeholder="🔍 Buscar canción...">
-            <button class="btn btn-primary" onclick="abrirModalAgregar()">➕ Agregar Canción</button>
+            <input type="text" class="search-box" id="searchInput" placeholder="🔍 Buscar alabanza por nombre o artista...">
+            <button class="btn btn-primary" onclick="abrirModalAgregar()">➕ Agregar Alabanza</button>
         </div>
 
         <div class="filters" id="filters"></div>
@@ -346,12 +346,12 @@
     <div class="modal" id="songModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 id="modalTitle">Agregar Nueva Canción</h2>
+                <h2 id="modalTitle">Agregar Nueva Alabanza</h2>
                 <button class="close-btn" onclick="cerrarModalAgregar()">&times;</button>
             </div>
             <div>
                 <div class="form-group">
-                    <label>Nombre de la canción *</label>
+                    <label>Nombre de la alabanza *</label>
                     <input type="text" id="songName" required>
                 </div>
                 <div class="form-group">
@@ -426,12 +426,12 @@
         let tamanoFuente = 16;
         let editandoId = null;
 
-        // Canciones de ejemplo
+        // Alabanzas de ejemplo
         const ejemplos = [
             {
                 id: '1',
                 name: 'Sublime Gracia',
-                artist: 'Traditional',
+                artist: 'John Newton',
                 category: 'Worship',
                 lyrics: `      G            C         G
 Sublime gracia del Señor
@@ -440,22 +440,66 @@ Que a mí pecador salvó
       G          C       G
 Fui ciego mas hoy veo yo
       D           G
-Perdido y Él me halló`
+Perdido y Él me halló
+
+      G              C        G
+Su gracia me enseñó a temer
+                 D
+Mis dudas ahuyentó
+      G           C      G
+Oh cuán precioso fue a mi ser
+      D              G
+Cuando Él me transformó`
             },
             {
                 id: '2',
-                name: 'Aquí Estoy',
-                artist: 'Hillsong',
+                name: 'Santo, Santo, Santo',
+                artist: 'Reginald Heber',
                 category: 'Alabanza',
-                lyrics: `C                G
-Luz del mundo Tú viniste
-Am                F
-A las tinieblas de mi ser
+                lyrics: `D                 A
+Santo, Santo, Santo
+      D          G
+Señor Omnipotente
+      D              A
+Siempre el labio mío
+      D         A    D
+Loores te dará
 
-     C              G
-Aquí estoy, yo me rindo a Ti
-Am               F
-Toma mi vida, mi corazón`
+      D              A
+Santo, Santo, Santo
+      D          G
+Te adoro reverente
+      D              A
+Dios en tres personas
+      D    A    D
+Trinidad eternal`
+            },
+            {
+                id: '3',
+                name: 'Cuán Grande Es Él',
+                artist: 'Stuart K. Hine',
+                category: 'Worship',
+                lyrics: `C                    F
+Señor, mi Dios al contemplar
+    C                  G
+Los cielos el firmamento y las estrellas mil
+   C                  F
+Al oír tu voz en los potentes truenos
+     C           G        C
+Y ver brillar el sol en su cenit
+
+       C              F
+Entonces canta mi alma 
+      C                G
+Canta a ti Señor, cuán grande es Él
+      C                F
+Cuán grande es Él
+       C              F
+Entonces canta mi alma
+      C                G
+Canta a ti Señor, cuán grande es Él
+      C              
+Cuán grande es Él`
             }
         ];
 
@@ -496,7 +540,7 @@ Toma mi vida, mi corazón`
             const letra = document.getElementById('songLyrics').value.trim();
             
             if (!nombre || !letra) {
-                alert('Por favor completa el nombre y la letra de la canción');
+                alert('Por favor completa el nombre y la letra de la alabanza');
                 return;
             }
             
@@ -542,7 +586,7 @@ Toma mi vida, mi corazón`
             }
 
             if (canciones.length === 0) {
-                grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><h2>No hay canciones</h2></div>';
+                grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><h2>No hay alabanzas</h2></div>';
                 return;
             }
 
@@ -654,7 +698,7 @@ Toma mi vida, mi corazón`
             if (!c) return;
 
             editandoId = c.id;
-            document.getElementById('modalTitle').textContent = 'Editar Canción';
+            document.getElementById('modalTitle').textContent = 'Editar Alabanza';
             document.getElementById('songName').value = c.name;
             document.getElementById('songArtist').value = c.artist || '';
             document.getElementById('songCategory').value = c.category;
@@ -665,7 +709,7 @@ Toma mi vida, mi corazón`
         }
 
         function eliminarCancionActual() {
-            if (!confirm('¿Eliminar esta canción?')) return;
+            if (!confirm('¿Eliminar esta alabanza?')) return;
             
             todasLasCanciones = todasLasCanciones.filter(c => c.id !== cancionActualId);
             localStorage.setItem('canciones', JSON.stringify(todasLasCanciones));
@@ -679,7 +723,7 @@ Toma mi vida, mi corazón`
         // MODALES
         function abrirModalAgregar() {
             editandoId = null;
-            document.getElementById('modalTitle').textContent = 'Agregar Nueva Canción';
+            document.getElementById('modalTitle').textContent = 'Agregar Nueva Alabanza';
             document.getElementById('songName').value = '';
             document.getElementById('songArtist').value = '';
             document.getElementById('songCategory').value = 'Worship';
