@@ -5,11 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🎶 Himnario León de Judá | Alabanza y Adoración</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -18,16 +14,9 @@
             padding: 20px;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        .container { max-width: 1200px; margin: 0 auto; }
 
-        .header {
-            text-align: center;
-            color: white;
-            margin-bottom: 30px;
-        }
+        .header { text-align: center; color: white; margin-bottom: 30px; }
 
         .header h1 {
             font-size: 2.5em;
@@ -35,21 +24,7 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
-        .debug-info {
-            background: rgba(255,255,255,0.2);
-            color: white;
-            padding: 10px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            font-size: 14px;
-            text-align: center;
-        }
-
-        .search-add-container {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
+        .search-add-container { display: flex; gap: 10px; margin-bottom: 20px; }
 
         .search-box {
             flex: 1;
@@ -71,36 +46,13 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
-        .btn-primary {
-            background: #10b981;
-            color: white;
-        }
+        .btn-primary { background: #10b981; color: white; }
+        .btn-primary:hover { background: #059669; transform: translateY(-2px); }
+        .btn-secondary { background: #6b7280; color: white; }
+        .btn-secondary:hover { background: #4b5563; }
+        .btn-small { padding: 8px 15px; font-size: 14px; }
 
-        .btn-primary:hover {
-            background: #059669;
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background: #6b7280;
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background: #4b5563;
-        }
-
-        .btn-small {
-            padding: 8px 15px;
-            font-size: 14px;
-        }
-
-        .filters {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
+        .filters { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
 
         .filter-btn {
             padding: 10px 20px;
@@ -135,23 +87,9 @@
             transition: all 0.3s;
         }
 
-        .song-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
-        }
-
-        .song-card h3 {
-            color: #667eea;
-            margin-bottom: 8px;
-            font-size: 1.3em;
-        }
-
-        .song-card .artist {
-            color: #6b7280;
-            font-size: 0.9em;
-            margin-bottom: 10px;
-        }
-
+        .song-card:hover { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0,0,0,0.2); }
+        .song-card h3 { color: #667eea; margin-bottom: 8px; font-size: 1.3em; }
+        .song-card .artist { color: #6b7280; font-size: 0.9em; }
         .song-card .category {
             display: inline-block;
             background: #e0e7ff;
@@ -165,21 +103,14 @@
         .modal {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             background: rgba(0,0,0,0.7);
             z-index: 1000;
             overflow-y: auto;
         }
 
-        .modal.show {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
+        .modal.show { display: flex; align-items: center; justify-content: center; padding: 20px; }
 
         .modal-content {
             background: white;
@@ -195,43 +126,36 @@
         .modal-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             margin-bottom: 20px;
             padding-bottom: 15px;
             border-bottom: 2px solid #e5e7eb;
         }
 
-        .modal-header h2 {
-            color: #667eea;
-            font-size: 1.8em;
-        }
+        .modal-header h2 { color: #667eea; font-size: 1.8em; }
+        .modal-header .artist-sub { color: #6b7280; margin-top: 4px; }
 
-        .close-btn {
-            background: none;
-            border: none;
-            font-size: 28px;
-            cursor: pointer;
-            color: #6b7280;
-        }
+        .close-btn { background: none; border: none; font-size: 28px; cursor: pointer; color: #6b7280; }
+        .close-btn:hover { color: #dc2626; }
 
-        .close-btn:hover {
-            color: #dc2626;
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; color: #374151; font-weight: 600; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 15px;
         }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .form-group textarea { min-height: 200px; font-family: 'Courier New', monospace; resize: vertical; }
 
-        .song-viewer {
-            background: #f9fafb;
-            padding: 30px;
-            border-radius: 12px;
-            margin-top: 20px;
-        }
+        .song-viewer { background: #f9fafb; padding: 20px; border-radius: 12px; margin-top: 20px; }
 
-        .song-controls {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
+        .song-controls { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
 
         .transpose-controls, .font-size-controls {
             display: flex;
@@ -243,49 +167,28 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .transpose-controls span, .font-size-controls span {
-            font-weight: 600;
-            color: #374151;
-        }
+        .transpose-controls span, .font-size-controls span { font-weight: 600; color: #374151; }
 
         .song-content {
             background: white;
-            padding: 30px;
+            padding: 25px;
             border-radius: 8px;
             white-space: pre-wrap;
             font-family: 'Courier New', monospace;
             line-height: 1.8;
         }
 
-        .chord {
-            color: #dc2626;
-            font-weight: bold;
-        }
+        .chord { color: #dc2626; font-weight: bold; }
 
-        .action-buttons {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-        }
+        .action-buttons { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
 
-        .empty-state {
-            text-align: center;
-            padding: 60px 20px;
-            color: white;
-        }
-
-        .empty-state h2 {
-            font-size: 2em;
-            margin-bottom: 15px;
-        }
+        .empty-state { text-align: center; padding: 60px 20px; color: white; grid-column: 1/-1; }
+        .empty-state h2 { font-size: 2em; margin-bottom: 15px; }
 
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.8em;
-            }
-            .songs-grid {
-                grid-template-columns: 1fr;
-            }
+            .header h1 { font-size: 1.8em; }
+            .songs-grid { grid-template-columns: 1fr; }
+            .song-controls { flex-direction: column; }
         }
     </style>
 </head>
@@ -296,16 +199,48 @@
             <p>Alabanza y Adoración</p>
         </div>
 
-        <div class="debug-info" id="debugInfo">
-            Cargando alabanzas desde Google Sheets... 🎶
-        </div>
-
         <div class="search-add-container">
             <input type="text" class="search-box" id="searchInput" placeholder="🔍 Buscar alabanza por nombre o artista...">
+            <button class="btn btn-primary" id="btnAgregar" onclick="abrirModalAgregar()" style="display:none;">➕ Agregar Alabanza</button>
         </div>
 
         <div class="filters" id="filters"></div>
         <div class="songs-grid" id="songsGrid"></div>
+    </div>
+
+    <!-- Modal Agregar -->
+    <div class="modal" id="songModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Agregar Nueva Alabanza</h2>
+                <button class="close-btn" onclick="cerrarModalAgregar()">&times;</button>
+            </div>
+            <div>
+                <div class="form-group">
+                    <label>Nombre de la alabanza *</label>
+                    <input type="text" id="songName" placeholder="Ej: Grande y Poderoso">
+                </div>
+                <div class="form-group">
+                    <label>Artista / Autor</label>
+                    <input type="text" id="songArtist" placeholder="Ej: Marco Barrientos">
+                </div>
+                <div class="form-group">
+                    <label>Categoría *</label>
+                    <select id="songCategory">
+                        <option value="Adoración">Adoración</option>
+                        <option value="Júbilo">Júbilo</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Letra y Acordes *</label>
+                    <textarea id="songLyrics" placeholder="      C           G&#10;Letra de la alabanza aquí&#10;      Am          F&#10;Más letra aquí"></textarea>
+                </div>
+                <div class="action-buttons">
+                    <button type="button" class="btn btn-primary" onclick="guardarAlabanza()">💾 Guardar</button>
+                    <button type="button" class="btn btn-secondary" onclick="cerrarModalAgregar()">Cancelar</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Modal Ver -->
@@ -314,7 +249,7 @@
             <div class="modal-header">
                 <div>
                     <h2 id="viewSongName"></h2>
-                    <p class="artist" id="viewSongArtist"></p>
+                    <p class="artist-sub" id="viewSongArtist"></p>
                 </div>
                 <button class="close-btn" onclick="cerrarModalVer()">&times;</button>
             </div>
@@ -326,7 +261,6 @@
                     <button class="btn btn-secondary btn-small" onclick="transponer(1)">♯ +1</button>
                     <button class="btn btn-secondary btn-small" onclick="resetearTono()">Reset</button>
                 </div>
-                
                 <div class="font-size-controls">
                     <button class="btn btn-secondary btn-small" onclick="cambiarTamano(-2)">A-</button>
                     <span>Tamaño</span>
@@ -339,113 +273,126 @@
             </div>
 
             <div class="action-buttons">
+                <button class="btn btn-primary btnAdmin" onclick="editarAlabanza()" style="display:none;">✏️ Editar</button>
+                <button class="btn btn-secondary btnAdmin" onclick="eliminarAlabanza()" style="display:none;">🗑️ Eliminar</button>
                 <button class="btn btn-secondary" onclick="cerrarModalVer()">Cerrar</button>
             </div>
         </div>
     </div>
 
     <script>
-        // Variables globales
-        let todasLasAlabanzas = [];
+        // ============================================
+        // LISTA DE ALABANZAS - AGREGA AQUÍ LAS NUEVAS
+        // ============================================
+        const alabanzas = [
+            {
+                id: '1',
+                name: 'Sublime Gracia',
+                artist: 'John Newton',
+                category: 'Adoración',
+                lyrics: `      G            C         G
+Sublime gracia del Señor
+                D
+Que a mí pecador salvó
+      G          C       G
+Fui ciego mas hoy veo yo
+      D           G
+Perdido y Él me halló
+
+      G              C        G
+Su gracia me enseñó a temer
+                 D
+Mis dudas ahuyentó
+      G           C      G
+Oh cuán precioso fue a mi ser
+      D              G
+Cuando Él me transformó`
+            },
+            {
+                id: '2',
+                name: 'Santo, Santo, Santo',
+                artist: 'Reginald Heber',
+                category: 'Adoración',
+                lyrics: `D                 A
+Santo, Santo, Santo
+      D          G
+Señor Omnipotente
+      D              A
+Siempre el labio mío
+      D         A    D
+Loores te dará
+
+      D              A
+Santo, Santo, Santo
+      D          G
+Te adoro reverente
+      D              A
+Dios en tres personas
+      D    A    D
+Trinidad eternal`
+            },
+            {
+                id: '3',
+                name: 'Cuán Grande Es Él',
+                artist: 'Stuart K. Hine',
+                category: 'Júbilo',
+                lyrics: `C                    F
+Señor mi Dios al contemplar
+    C                  G
+Los cielos el firmamento y las estrellas mil
+   C                  F
+Al oír tu voz en los potentes truenos
+     C           G        C
+Y ver brillar el sol en su cenit
+
+       C              F
+Entonces canta mi alma
+      C                G
+Canta a ti Señor cuán grande es Él
+      C                F
+Cuán grande es Él`
+            }
+        // FIN DE ALABANZAS - NO BORRES ESTA LÍNEA
+        ];
+
+        // ============================================
+        // CÓDIGO DEL SISTEMA - NO MODIFICAR
+        // ============================================
         let alabanzaActualId = null;
         let transposicion = 0;
         let tamanoFuente = 16;
+        let editandoId = null;
 
-        // URL de tu Google Sheet
-        const GOOGLE_SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTdFW5M436XB-I9ME8blmBkMFrWO4d-7wqoS1MroFzv10kgsTGRkYOP3ZLSL4TOkH_G30t7RAfsTngw/pub?output=csv';
+        // Verificar modo admin
+        const urlParams = new URLSearchParams(window.location.search);
+        const esAdmin = urlParams.get('admin') === 'true';
 
-        // Cargar alabanzas desde Google Sheets
-        async function cargarAlabanzas() {
-            try {
-                actualizarDebug('⏳ Cargando alabanzas...');
-                
-                const response = await fetch(GOOGLE_SHEET_URL);
-                const csvText = await response.text();
-                
-                // Parsear CSV
-                const lineas = csvText.split('\n');
-                todasLasAlabanzas = [];
-                
-                // Saltar primera línea (encabezados)
-                for (let i = 1; i < lineas.length; i++) {
-                    const linea = lineas[i].trim();
-                    if (!linea) continue;
-                    
-                    // Parsear CSV manualmente
-                    const partes = parsearLineaCSV(linea);
-                    
-                    if (partes.length >= 5) {
-                        todasLasAlabanzas.push({
-                            id: partes[0],
-                            name: partes[1],
-                            artist: partes[2],
-                            category: partes[3],
-                            lyrics: partes[4]
-                        });
-                    }
-                }
-                
-                actualizarDebug(`✅ ${todasLasAlabanzas.length} alabanzas cargadas`);
-                mostrarAlabanzas();
-                mostrarFiltros();
-                
-            } catch (error) {
-                console.error('Error:', error);
-                actualizarDebug('❌ Error al cargar. Refresca la página');
+        function iniciar() {
+            if (esAdmin) {
+                document.getElementById('btnAgregar').style.display = 'block';
+                document.querySelectorAll('.btnAdmin').forEach(b => b.style.display = 'inline-block');
             }
+            mostrarAlabanzas();
+            mostrarFiltros();
         }
 
-        // Parsear línea CSV
-        function parsearLineaCSV(linea) {
-            const resultado = [];
-            let campo = '';
-            let dentroComillas = false;
-            
-            for (let i = 0; i < linea.length; i++) {
-                const char = linea[i];
-                
-                if (char === '"') {
-                    dentroComillas = !dentroComillas;
-                } else if (char === ',' && !dentroComillas) {
-                    resultado.push(campo.trim());
-                    campo = '';
-                } else {
-                    campo += char;
-                }
-            }
-            resultado.push(campo.trim());
-            
-            return resultado;
-        }
-
-        function actualizarDebug(msg) {
-            document.getElementById('debugInfo').textContent = msg;
-        }
-
-        // Mostrar alabanzas
         function mostrarAlabanzas(filtro = null) {
             const grid = document.getElementById('songsGrid');
             const busqueda = document.getElementById('searchInput').value.toLowerCase();
             
-            let alabanzas = todasLasAlabanzas;
-            
-            if (filtro) {
-                alabanzas = alabanzas.filter(a => a.category === filtro);
-            }
-            
-            if (busqueda) {
-                alabanzas = alabanzas.filter(a => 
-                    a.name.toLowerCase().includes(busqueda) || 
-                    (a.artist && a.artist.toLowerCase().includes(busqueda))
-                );
-            }
+            let lista = alabanzas;
+            if (filtro) lista = lista.filter(a => a.category === filtro);
+            if (busqueda) lista = lista.filter(a =>
+                a.name.toLowerCase().includes(busqueda) ||
+                (a.artist && a.artist.toLowerCase().includes(busqueda))
+            );
 
-            if (alabanzas.length === 0) {
-                grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1;"><h2>No hay alabanzas</h2></div>';
+            if (lista.length === 0) {
+                grid.innerHTML = '<div class="empty-state"><h2>No hay alabanzas</h2></div>';
                 return;
             }
 
-            grid.innerHTML = alabanzas.map(a => `
+            grid.innerHTML = lista.map(a => `
                 <div class="song-card" onclick="verAlabanza('${a.id}')">
                     <h3>${a.name}</h3>
                     ${a.artist ? `<div class="artist">${a.artist}</div>` : ''}
@@ -455,13 +402,11 @@
         }
 
         function mostrarFiltros() {
-            const categorias = [...new Set(todasLasAlabanzas.map(a => a.category))];
-            const div = document.getElementById('filters');
-            
-            div.innerHTML = `
-                <button class="filter-btn active" onclick="filtrar(null, this)">Todas (${todasLasAlabanzas.length})</button>
+            const categorias = [...new Set(alabanzas.map(a => a.category))];
+            document.getElementById('filters').innerHTML = `
+                <button class="filter-btn active" onclick="filtrar(null, this)">Todas (${alabanzas.length})</button>
                 ${categorias.map(cat => {
-                    const n = todasLasAlabanzas.filter(a => a.category === cat).length;
+                    const n = alabanzas.filter(a => a.category === cat).length;
                     return `<button class="filter-btn" onclick="filtrar('${cat}', this)">${cat} (${n})</button>`;
                 }).join('')}
             `;
@@ -473,20 +418,19 @@
             mostrarAlabanzas(categoria);
         }
 
-        // Ver alabanza
         function verAlabanza(id) {
-            const alabanza = todasLasAlabanzas.find(a => a.id === id);
-            if (!alabanza) return;
+            const a = alabanzas.find(x => x.id === id);
+            if (!a) return;
 
             alabanzaActualId = id;
             transposicion = 0;
             tamanoFuente = 16;
 
-            document.getElementById('viewSongName').textContent = alabanza.name;
-            document.getElementById('viewSongArtist').textContent = alabanza.artist || '';
+            document.getElementById('viewSongName').textContent = a.name;
+            document.getElementById('viewSongArtist').textContent = a.artist || '';
             document.getElementById('transposeValue').textContent = 'Tono: 0';
             
-            mostrarContenido(alabanza.lyrics);
+            mostrarContenido(a.lyrics);
             document.getElementById('viewModal').classList.add('show');
         }
 
@@ -495,19 +439,12 @@
             div.style.fontSize = tamanoFuente + 'px';
             
             const lineas = letra.split('\n');
-            const procesadas = lineas.map(linea => {
+            div.innerHTML = lineas.map(linea => {
                 const tieneAcordes = /\b[A-G](#|b)?(m|maj|min|dim|aug|sus|add)?[0-9]?\b/.test(linea);
-                const espacios = linea.replace(/\s/g, '').length;
-                const total = linea.length;
-                const esLineaAcordes = tieneAcordes && (total === 0 || espacios / total < 0.7);
-                
-                if (esLineaAcordes) {
-                    return `<div class="chord">${transponerLinea(linea)}</div>`;
-                }
-                return linea;
+                const proporcion = linea.replace(/\s/g, '').length / (linea.length || 1);
+                const esAcorde = tieneAcordes && proporcion < 0.7;
+                return esAcorde ? `<div class="chord">${transponerLinea(linea)}</div>` : linea;
             }).join('\n');
-            
-            div.innerHTML = procesadas;
         }
 
         function transponerLinea(linea) {
@@ -515,36 +452,44 @@
             return linea.replace(/\b([A-G](#|b)?(m|maj|min|dim|aug|sus|add)?[0-9]?)\b/g, (match) => {
                 let raiz = match.match(/^[A-G](#|b)?/)[0];
                 let sufijo = match.slice(raiz.length);
-                
-                raiz = raiz.replace('Db', 'C#').replace('Eb', 'D#')
-                         .replace('Gb', 'F#').replace('Ab', 'G#').replace('Bb', 'A#');
-                
+                raiz = raiz.replace('Db','C#').replace('Eb','D#').replace('Gb','F#').replace('Ab','G#').replace('Bb','A#');
                 let idx = acordes.indexOf(raiz);
                 if (idx === -1) return match;
-                
-                idx = (idx + transposicion + 12) % 12;
-                return acordes[idx] + sufijo;
+                return acordes[(idx + transposicion + 12) % 12] + sufijo;
             });
         }
 
         function transponer(n) {
             transposicion += n;
             document.getElementById('transposeValue').textContent = `Tono: ${transposicion > 0 ? '+' : ''}${transposicion}`;
-            const a = todasLasAlabanzas.find(x => x.id === alabanzaActualId);
+            const a = alabanzas.find(x => x.id === alabanzaActualId);
             if (a) mostrarContenido(a.lyrics);
         }
 
         function resetearTono() {
             transposicion = 0;
             document.getElementById('transposeValue').textContent = 'Tono: 0';
-            const a = todasLasAlabanzas.find(x => x.id === alabanzaActualId);
+            const a = alabanzas.find(x => x.id === alabanzaActualId);
             if (a) mostrarContenido(a.lyrics);
         }
 
         function cambiarTamano(n) {
-            tamanoFuente += n;
-            tamanoFuente = Math.max(12, Math.min(28, tamanoFuente));
+            tamanoFuente = Math.max(12, Math.min(28, tamanoFuente + n));
             document.getElementById('songContent').style.fontSize = tamanoFuente + 'px';
+        }
+
+        function abrirModalAgregar() {
+            editandoId = null;
+            document.getElementById('modalTitle').textContent = 'Agregar Nueva Alabanza';
+            document.getElementById('songName').value = '';
+            document.getElementById('songArtist').value = '';
+            document.getElementById('songCategory').value = 'Adoración';
+            document.getElementById('songLyrics').value = '';
+            document.getElementById('songModal').classList.add('show');
+        }
+
+        function cerrarModalAgregar() {
+            document.getElementById('songModal').classList.remove('show');
         }
 
         function cerrarModalVer() {
@@ -552,19 +497,105 @@
             alabanzaActualId = null;
         }
 
-        // Búsqueda
+        function guardarAlabanza() {
+            const nombre = document.getElementById('songName').value.trim();
+            const letra = document.getElementById('songLyrics').value.trim();
+            
+            if (!nombre || !letra) {
+                alert('Por favor completa el nombre y la letra');
+                return;
+            }
+
+            const codigo = generarCodigoAlabanza(
+                nombre,
+                document.getElementById('songArtist').value.trim(),
+                document.getElementById('songCategory').value,
+                letra
+            );
+
+            cerrarModalAgregar();
+            mostrarInstrucciones(codigo, nombre);
+        }
+
+        function generarCodigoAlabanza(nombre, artista, categoria, letra) {
+            const id = Date.now().toString().slice(-4);
+            return `    ,
+    {
+        id: '${id}',
+        name: '${nombre}',
+        artist: '${artista}',
+        category: '${categoria}',
+        lyrics: \`${letra}\`
+    }`;
+        }
+
+        function mostrarInstrucciones(codigo, nombre) {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0,0,0,0.8); z-index: 2000;
+                display: flex; align-items: center; justify-content: center; padding: 20px;
+            `;
+            modal.innerHTML = `
+                <div style="background: white; border-radius: 16px; padding: 30px; max-width: 700px; width: 100%; max-height: 90vh; overflow-y: auto;">
+                    <h2 style="color: #667eea; margin-bottom: 15px;">📋 Código para "${nombre}"</h2>
+                    <p style="margin-bottom: 10px; color: #374151;">Copia este código y sigue los pasos:</p>
+                    
+                    <textarea id="codigoGenerado" style="width:100%; height:200px; font-family: monospace; font-size: 12px; padding: 10px; border: 2px solid #667eea; border-radius: 8px; margin-bottom: 15px;" readonly>${codigo}</textarea>
+                    
+                    <button onclick="copiarCodigo()" style="background: #10b981; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; margin-bottom: 15px; width: 100%;">
+                        📋 Copiar Código
+                    </button>
+
+                    <div style="background: #f0f9ff; padding: 15px; border-radius: 8px; border-left: 4px solid #667eea; margin-bottom: 15px;">
+                        <strong>📤 Pasos para publicar:</strong><br><br>
+                        1. Copia el código de arriba<br>
+                        2. Ve a: <a href="https://github.com/felixcuevas1000-lab/Himnario---Le-n-de-Jud-" target="_blank" style="color: #667eea;">tu repositorio en GitHub</a><br>
+                        3. Click en <strong>index.html</strong> → ✏️ Editar<br>
+                        4. Busca con Ctrl+F: <strong>// FIN DE ALABANZAS</strong><br>
+                        5. Pega el código ANTES de esa línea<br>
+                        6. Guarda con "Commit changes"<br>
+                        7. Espera 2 minutos y refresca 🎶
+                    </div>
+
+                    <button onclick="this.closest('div').parentElement.remove()" style="background: #6b7280; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; width: 100%;">
+                        Cerrar
+                    </button>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        function copiarCodigo() {
+            const textarea = document.getElementById('codigoGenerado');
+            textarea.select();
+            document.execCommand('copy');
+            alert('✅ ¡Código copiado! Ahora pégalo en GitHub');
+        }
+
+        function editarAlabanza() {
+            const a = alabanzas.find(x => x.id === alabanzaActualId);
+            if (!a) return;
+            editandoId = a.id;
+            document.getElementById('modalTitle').textContent = 'Editar Alabanza';
+            document.getElementById('songName').value = a.name;
+            document.getElementById('songArtist').value = a.artist || '';
+            document.getElementById('songCategory').value = a.category;
+            document.getElementById('songLyrics').value = a.lyrics;
+            cerrarModalVer();
+            document.getElementById('songModal').classList.add('show');
+        }
+
+        function eliminarAlabanza() {
+            if (!confirm('¿Eliminar esta alabanza?')) return;
+            cerrarModalVer();
+            alert('Para eliminar, borra el bloque de esta alabanza en GitHub (index.html)');
+        }
+
         document.getElementById('searchInput').addEventListener('input', () => mostrarAlabanzas());
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') { cerrarModalVer(); cerrarModalAgregar(); } });
 
-        // Cerrar con ESC
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') cerrarModalVer();
-        });
-
-        // Recargar cada 2 minutos
-        setInterval(cargarAlabanzas, 120000);
-
-        // Iniciar
-        cargarAlabanzas();
+        iniciar();
     </script>
 </body>
 </html>
